@@ -7,10 +7,17 @@
     <title>Book-API</title>
 </head>
 <body>
+
+    <%book.forEach(element  => { %>
+        <h2>Title :<%= element.title %></h2>
+        <h3>Author : <%= element.author %></h3>
+        <img src="<%= element.img %>" alt="">
+
     <%dataROW.forEach(element  => { %>
         <h2>Title :<%= element.title %></h2>
         <h3>Author : <%= element.author %></h3>
         <img src="<%= element.url %>" alt="">
+
         <p>Description: <%= element.description %></p>
     <% }); %>
 </body>
