@@ -1,49 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>show oneook</title>
+    <link rel="stylesheet" href="styles/base.css">
+    <title>Book-API</title>
 </head>
-
 <body>
-    <section>
-        <img src="<%= book.img %>" alt="">
-        <h2>Title :<%= book.title %></h2>
-        <h3>Author : <%= book.author %></h3>
-        <p> Description: <%= book.description %></p>
-        <p> ISBN: <%= book.isbn%></p>
-        <!-- shelf-->
-    </section>
+   
+   <div >
+       <h2>Title :<%= book.title %></h2>
+       <h3>Author : <%= book.author %></h3>
+       <img src="<%=book.image_url %>" alt="">
+       <p>ISBN: <%=book.isbn%></p>
+       <p>Description: <%= book.descriptions %></p>
 
-
-
-    <!-- <form     action="/book/<%=book.id%>" method="get">
-        <legend> BOOK API </legend>
-        <input type="image" src="<%= book.img %>" alt="">
-        <fieldset> <span>Title :</span>
-            <input value="<%= book.title %>" type="text" name="title">
-            <br><br>
-            <span>Author:</span>
-            <input type="text" name="author" value="<%= book.author %>">
-            <br>
-            <br>
-            <span> Description: </span>
-            <input type="text" name="description" value="<%= book.description %>">
-            <br><br>
-            <span> ISBN: </span>
-            <input type="text" name="description" value="<%= book.industryIdentifiers%>">//على جنب لنفهم الموضوع :)
-            <br><br>
-
-            <input type="submit" value="Add to book shelf :(">
-        </fieldset>
-
-    </form> -->
-
-
-    <!-- book/<%=book.id%> -->
-
+   </div>
 </body>
-
 </html>

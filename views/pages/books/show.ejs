@@ -7,12 +7,7 @@
     <title>Book-API</title>
 </head>
 <body>
-   <div>
-       <h2>Title :<%= book.title %></h2>
-       <h3>Author : <%= book.author %></h3>
-       <img src="<%= book.image_url %>" alt="">
-       <p>Description: <%= book.description %></p>
-   </div>
+   
+ <%- include('detail',{book:book}) %>
 </body>
-
 </html>
