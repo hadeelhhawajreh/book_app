@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book-API</title>
+    <%- include('../../pages/header') %>
+
 </head>
 <body>
     <main>
         <h4> Searches By Title or  Auther </h4>
     <form action="/searches" method="post">
-        <legend> BOOK API  </legend>
             <fieldset> 
                 <input type="text" name="titleAuthor" id="" placeholder="enter a title or author" required>
                 <br><br>

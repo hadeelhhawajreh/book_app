@@ -4,33 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <%- include('../../pages/header') %>
 </head>
 <body>
     <main>
         <% bookObjects.forEach(book  => { %>
+            <div>
              <p>
                 <img src="<%=book.image_url %>" alt="">
             </p>
-            <span>Title :</span>
-            <p><%= book.title %></p>
-             <span>Author:</span>
-             <p><%= book.author %></p>
-                <br>
-                <br>
-                <span> Description: </span> <br> 
-                <p> <%= book.descriptions %></p>
-                <span> ISBN: </span> <br> 
-                <p> <%= book.isbn %></p>
-                <a href="">select this book</a>
+            <p> <span>Title :</span><%= book.title %></p>
+             
+             <p><span>Author:</span><%= book.author %></p>
+                 
+                <p><span> Description: </span> <%= book.descriptions %></p>
+               <p> <span> ISBN: </span> <%= book.isbn %></p>
+            </div> 
         <br>
         <form action="/book" method="post" type="hidden">
-         <input type="text" name="image_url" value="<%= book.image_url %>">
-         <input value="<%= book.title %>" type="text" name="title"><br>
-         <input type="text" name="author" value="<%= book.author %>"><br>
-         <textarea name="descriptions" cols="60" rows="20">
-            <%= book.description %> 
-         </textarea><br>
-         <input type="submit" value="save to database">
+       <div style="display: none;">
+        <input type="text" name="image_url" value="<%= book.image_url %>">
+        <input value="<%= book.title %>" type="text" name="title"><br>
+        <input type="text" name="author" value="<%= book.author %>"><br>
+        <textarea name="descriptions" cols="60" rows="20">
+           <%= book.description %> 
+        </textarea><br>
+        <input type="text" name="isbn" value="<%= book.isbn %>"><br>
+
+       </div>
+         <input type="submit" value="View details">
         </form>
         <% }); %>
     </main>

@@ -23,6 +23,7 @@ app.use('/public', express.static('public'));// show css.... sufaring :(
 
 app.set('view engine', 'ejs');//using file view &engin=>ejs
 
+
 // *****************constructor *************************** \\
 
 function Book(objbook) {
@@ -37,9 +38,10 @@ function Book(objbook) {
     }
     this.title = objbook.volumeInfo.title;
     this.author = objbook.volumeInfo.authors;
-    this.description = objbook.volumeInfo.description ? objbook.volumeInfo.description : "no description";
+    this.descriptions = objbook.volumeInfo.description ? objbook.volumeInfo.description : "no description";
     this.isbn = objbook.volumeInfo.industryIdentifiers ?objbook.volumeInfo.industryIdentifiers[0].type +objbook.volumeInfo.industryIdentifiers[0].identifier :'No ISBN Found';
 }
+
 //**************routs***********
 app.get('/', handleIndex);
 app.get('/searches/new', (req, res) => {
@@ -51,20 +53,27 @@ app.post('/searches', handleSearches);
 app.post('/book', addbook);
 app.get('/book/:id',getbook);
 
+
+let methodOverride=require('method-override');
+app.use(methodOverride('_method'));
+
+/******************** functions handling ...****************** */
 function handleIndex(req, res) {
     let selectst = `SELECT * FROM book;`;
     return client.query(selectst).then(data => {
         let dataFROMsql = data.rows;
         let dataCount = data.rowCount;
         if(dataCount === 0){
-            // res.render('pages/searches/new')
+         res.send('no book available ...')
+
         }else{
-            res.render('pages/index',{book:data.rows});
+            res.render('pages/index',{book:data.rows,rowCounts:dataCount});
         }
     }).catch(err => {
         console.log(err);
     });
 }
+
 function handleSearches(request, response) {
     let titleAuthor = request.body.titleAuthor;
     let filter = request.body.search;
@@ -81,6 +90,7 @@ function handleSearches(request, response) {
         console.log('something went wrong ', error);
     });
 }
+
 function addbook(req,res){
     let {author,title,isbn,image_url,descriptions}=req.body;
     // console.log(req.body);
@@ -93,6 +103,7 @@ function addbook(req,res){
         console.log(err);
     });
 }
+
 function getbook(req,res){
     console.log('getbook');
     let sql = 'SELECT * FROM book WHERE id=$1;';

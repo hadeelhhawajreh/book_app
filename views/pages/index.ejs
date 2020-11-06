@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/base.css">
     <title>Book-API</title>
+    <%- include('header') %>
+
 </head>
 <body>
     <%book.forEach(element  => { %>
-        <div data-id>
+        <div >
         <h2>Title :<%= element.title %></h2>
         <h3>Author : <%= element.author %></h3>
         <img src="<%= element.image_url %>" alt="">
@@ -17,5 +19,6 @@
 
     </div>
     <% }); %>
+    <p><b> Total:<%=rowCounts%></b></p>
 </body>
 </html>
