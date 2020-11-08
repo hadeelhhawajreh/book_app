@@ -56,6 +56,8 @@ app.get('/book/:id',getbook);
 
 let methodOverride=require('method-override');
 app.use(methodOverride('_method'));
+app.put ('/books/:id', bookUpdate);
+app.delete('/book/:id', deleteBook);
 
 /******************** functions handling ...****************** */
 function handleIndex(req, res) {
@@ -78,7 +80,6 @@ function handleSearches(request, response) {
     let titleAuthor = request.body.titleAuthor;
     let filter = request.body.search;
     let url = `https://www.googleapis.com/books/v1/volumes?q=${titleAuthor}+in${filter}`;
-    console.log(url);
     superagent.get(url).then(data => {
         let objectApi = data.body.items;
         let bookArr = objectApi.map(element => {
@@ -124,3 +125,32 @@ client.connect().then((data) => {
 }).catch(err => {
     console.log(err);
 });
+
+function bookUpdate(req,res){
+  let recievedUpdate = req.body;
+  console.log(recievedUpdate);
+  let statement = `UPDATE book SET author=$1, title=$2, isbn=$3, image_url=$4, descriptions=$5  WHERE id=$6;`;
+  let values = [recievedUpdate.author, recievedUpdate.title, recievedUpdate.isbn, recievedUpdate.image_url, recievedUpdate.descriptions, recievedUpdate.id];
+  client.query(statement, values).then( data =>{
+    res.redirect(`/book/${recievedUpdate.id}`);
+    console.log('item updated ' + recievedUpdate.id);
+  }).catch((error) => {
+    console.log('something went wrong',error);
+  });
+}
+
+
+function deleteBook(req, res){
+
+let formData = req.body.id; //id from the form
+
+let deleteStatement =`DELETE FROM book WHERE id=${formData};`;
+client.query(deleteStatement).then(data=>{
+console.log('bookdeleted');
+res.redirect('/');
+
+}).catch(error=>{
+    console.log('something went wrong',error);
+    
+});
+}

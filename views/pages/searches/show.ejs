@@ -21,8 +21,8 @@
                <p> <span> ISBN: </span> <%= book.isbn %></p>
             </div> 
         <br>
-        <form action="/book" method="post" type="hidden">
-       <div style="display: none;">
+        <div class="updateForm" style="display: none;">
+        <form action="/book" method="post" type="hidden">      
         <input type="text" name="image_url" value="<%= book.image_url %>">
         <input value="<%= book.title %>" type="text" name="title"><br>
         <input type="text" name="author" value="<%= book.author %>"><br>
